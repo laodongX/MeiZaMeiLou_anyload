@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Data files (prevent accidentally commit large data)
+*.bin
+*.jsonl
+*.arrow
+*.npy
+
+# Logs and outputs
+*.log
+*.out
+*.pt
+*.pth
+
+# Jupyter
+.ipynb_checkpoints/
