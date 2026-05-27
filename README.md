@@ -265,7 +265,7 @@ for batch in loader.train_dataloader():
 
 配合 [Fidelity-metrics](https://github.com/laodongX/Fidelity-metrics)，你可以诊断模型各层的信息保真度 ：
 
-\`\`\`python
+```python
 from fidelity_metrics import SemanticFidelityProbe
 
 probe = SemanticFidelityProbe(dim=768)
