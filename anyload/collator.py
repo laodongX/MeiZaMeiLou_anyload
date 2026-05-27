@@ -78,7 +78,7 @@ class UniversalCollator:
         if "input_features" in batch[0] and batch[0]['input_features'] is not None:
             input_features = torch.stack([
                 item['input_features'] if isinstance(item['input_features'],torch.Tensor)
-                else torch.tensor(item['inpu_features']) for item in batch
+                else torch.tensor(item['input_features']) for item in batch
             ])
             result['input_features'] = input_features
 

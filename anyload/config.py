@@ -15,7 +15,7 @@ class TaskType(Enum):
 
 class LoadMode(Enum):
     DYNAMIC = "dynamic" # 动态分词 (datasets库自动缓存Arrow)
-    MEMAP = "memap" # 离线预分词 (mmap直读.bin)
+    MEMMAP = "memmap" # 离线预分词 (mmap直读.bin)
     STREAMING = "streaming" # 流式加载 (TB级数据)
 
 class Modality(Enum):
@@ -27,7 +27,13 @@ class Modality(Enum):
 
 @dataclass
 class UniversalDataConfig:
-    """工业级通用数据配置 — 一个dataclass覆盖所有场景"""
+    """
+    语义保真度驱动的通用数据配置。
+
+    核心思想：
+    - 数据从磁盘到 GPU 的每一层“翻译”都可能损失语义。
+    - 本配置统一描述：从哪里读、如何分词、如何度量保真度。
+    """
 
     # ── 数据源 ──
     train_path: str = "pretrain_train.jsonl"
@@ -53,7 +59,7 @@ class UniversalDataConfig:
 
     # ── 加载策略 ──
     load_mode:LoadMode = LoadMode.DYNAMIC
-    memap_bin_path :Optional[str] =None # LoadMode.MEMMAP时指定.bin路径
+    memmap_bin_path :Optional[str] =None # LoadMode.MEMMAP时指定.bin路径
 
     # ── 多模态列映射 ──
     text_col:str = "text"
@@ -70,7 +76,7 @@ class UniversalDataConfig:
     shuffle_train:bool = True
 
     #高级选项
-    filetr_config:Optional[Dict] = None   # {"loss_max": 3.0, "toxicity_max": 0.1, ...}
+    filter_config:Optional[Dict] = None   # {"loss_max": 3.0, "toxicity_max": 0.1, ...}
     cache_dir:Optional[str] = None   # datasets缓存目录
     streaming_buffer_size:int = 1000 # 流式加载缓冲
     seed:int =42

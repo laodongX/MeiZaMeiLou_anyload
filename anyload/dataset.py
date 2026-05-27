@@ -275,7 +275,7 @@ class UniversalDatasetFactory:
     def create(config:UniversalDataConfig,processor:UniversalProcessor,split:str = "train"):
         if config.load_mode == LoadMode.DYNAMIC:
             return DynamicDataset(config,processor,split)
-        elif config.load_mode == LoadMode.MEMAP:
+        elif config.load_mode == LoadMode.MEMMAP:
             return MemmapDataset(config,processor)
         elif config.load_mode == LoadMode.STREAMING:
             return StreamingDataset(config,processor,split)

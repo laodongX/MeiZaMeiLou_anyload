@@ -140,7 +140,7 @@ class UniversalProcessor:
         cfg = self.config
         model_inputs = self.tokenizer(
             source,
-            truancataion=cfg.truncation,
+            truncation=cfg.truncation,
             max_length = cfg.max_length,
             padding = cfg.padding,
             return_tensors=None
