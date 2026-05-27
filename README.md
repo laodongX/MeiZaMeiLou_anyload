@@ -261,20 +261,19 @@ for batch in loader.train_dataloader():
 
 ---
 
-### 🧪 与语义保真度联动
+## 🧪 与语义保真度联动
 
-配合 `fidelity-metrics` 工具，你可以对模型各层进行保真度扫描，检测信息“断流”点。
+配合 [Fidelity-metrics](https://github.com/laodongX/Fidelity-metrics)，你可以诊断模型各层的信息保真度 ：
 
-```python
+\`\`\`python
 from fidelity_metrics import SemanticFidelityProbe
 
 probe = SemanticFidelityProbe(dim=768)
-# 在验证集上，对模型各层做保真度扫描
 report = probe(z_layer4, z_layer8)
-print(report) 
-# 输出: {'structural': 0.85, 'distributional': 0.78, 'combined': 0.815}
+# {'structural': 0.85, 'distributional': 0.78, 'combined': 0.815}
+\`\`\`
 
-# 一旦某层 combined < 0.6，说明信息在此处丢失严重，需调整策略。
+一旦某层 combined < 0.6，说明信息在这里"断流"了。
 ```
 
 ---
